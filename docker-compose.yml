@@ -1,0 +1,86 @@
+version: '3.5'
+
+services:
+  ##########################
+  # Setup server container #   
+  ##########################
+  server:
+    build: ./server
+    depends_on:
+      - database
+    environment:
+      DB_HOST: database
+      DB_PORT: ${DB_PORT:-27017}
+      DB_USER: ${DB_USER:-user}
+      DB_PASS: ${DB_PASS:-password}
+      DB_NAME: ${DB_NAME:-mydatabase}
+    ports: 
+      - ${SERVER_PORT:-4000}:4000
+      # - 9229:9229 # Only for debuging nodejs server in Chrome DevTools
+    volumes:
+      - ./server:/app
+    restart: on-failure
+    command: npm run dev   
+    networks:
+      - search-engine-network
+
+  ##########################
+  # Setup client container #  
+  ##########################
+  client:
+    build: ./client
+    environment:
+      SERVER_HOST: ${SERVER_HOST:-localhost}
+      SERVER_PORT: ${SERVER_PORT:-4000}
+    ports: 
+      - ${CLIENT_PORT:-8080}:8080
+    volumes:
+      - ./client:/app
+    restart: on-failure
+    command: npm start
+    networks:
+      - search-engine-network
+
+  ############################
+  # Setup database container #    
+  ############################
+  database:
+    image: mongo:4.4.2
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${DB_ROOT_USER:-root}
+      MONGO_INITDB_ROOT_PASSWORD: ${DB_ROOT_PASS:-root_password}
+      MONGO_INITDB_DB: ${DB_NAME:-mydatabase}
+      DB_USER: ${DB_USER:-user}
+      DB_PASS: ${DB_PASS:-password}
+      DB_NAME: ${DB_NAME:-mydatabase}
+    ports:
+      - ${DB_PORT:-27017}:${DB_PORT:-27017}
+    volumes:
+      - ./database/mongo-dev/db:/data/db
+      - ./database/init-db/init-mongo.sh:/docker-entrypoint-initdb.d/init-mongo.sh:ro
+    restart: always
+    networks:
+      - search-engine-network
+
+  ###############################
+  # Setup database-UI container #    
+  ###############################
+  mongo-express:
+    image: mongo-express:0.54.0
+    depends_on:
+      - database
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: ${DB_ROOT_USER:-root}
+      ME_CONFIG_MONGODB_ADMINPASSWORD: ${DB_ROOT_PASS:-root_password}
+      ME_CONFIG_MONGODB_SERVER: database
+    ports:
+      - 8081:8081
+    restart: always
+    networks:
+      - search-engine-network
+
+networks:
+  search-engine-network:
+    driver: bridge
+    # driver_opts:
+      # com.docker.network.driver.mtu: 1450
