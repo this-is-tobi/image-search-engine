@@ -64,6 +64,7 @@ export const sortResult = (result) => {
   return result.map(keyword => {
     return {
       word: keyword.word,
+      // images: [keyword.images.sort((a, b) => b.score - a.score)[0]],
       images: keyword.images.sort((a, b) => b.score - a.score),
     }
   })
