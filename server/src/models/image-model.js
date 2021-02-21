@@ -1,7 +1,6 @@
 import mongoose from 'mongoose'
 
 const { Schema } = mongoose
-// const ObjectId = Schema.Types.ObjectId
 
 const ImageSchema = new Schema(
   {
@@ -11,11 +10,6 @@ const ImageSchema = new Schema(
     },
     keywords: {
       type: [String],
-      // type: [
-      //   {
-      //     word: String,
-      //     score: Number,
-      //   }],
     },
   },
 )

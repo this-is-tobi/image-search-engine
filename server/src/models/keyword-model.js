@@ -10,9 +10,6 @@ const KeywordSchema = new Schema(
       trim: true,
     },
     images: {
-      // type: [String],
-      // type: [ObjectId],
-      // ref: 'Image',
       type: [
         {
           imageId: ObjectId,

@@ -74,7 +74,6 @@ export const getImageRegex = async (query) => {
       images: mergeById(keyword.images, keyword.images_doc),
     }
   })
-  console.log(result)
   return result
 }
 

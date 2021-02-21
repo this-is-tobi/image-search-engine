@@ -16,7 +16,6 @@ export default {
       let images
       try {
         images = await api.getImageList()
-        console.log(images)
       } catch (error) {
         const errorMessage = `An error as occured : ${error.message}` // eslint-disable-line no-irregular-whitespace
         console.log(errorMessage)
@@ -28,7 +27,6 @@ export default {
       let images
       try {
         images = await api.getImage(keyword)
-        console.log(images)
       } catch (error) {
         const errorMessage = `An error as occured : ${error.message}` // eslint-disable-line no-irregular-whitespace
         console.log(errorMessage)

@@ -63,7 +63,6 @@ export const getImageKeywordsController = async (req, res) => {
     const keyword = req.params.keyword
     const images = await getImageMultipleKeywords(keyword)
     const sortedImages = sortResult(images)
-    console.log(sortedImages)z
     res.status(200).json({
       message: sortedImages,
       success: true,
