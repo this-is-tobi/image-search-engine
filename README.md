@@ -63,22 +63,16 @@ The client is running on `http://locahost:8080`.
 
 - Search by keyword, multiple keywords and regex too.  
 
-## Algorithms
+## Data
 
-### MongoDB document indexing
+### MongoDB indexes
+
+MongoDB implements [indexes](https://docs.mongodb.com/manual/indexes/) to limit the number of documents it must inspect on queries instead of scanning each document inside the collection.
+
+More on Mongo B-tree can be found here :
 
 - <https://zhangliyong.github.io/posts/2014/02/19/mongodb-index-internals.html>
-  
-- <https://docs.mongodb.com/manual/indexes/>
-
-- <https://stackoverflow.com/questions/29498722/mongodb-find-and-remove-algorithmic-complexity>
-
-- <https://ananya281294.medium.com/mongo-maths-676469e55f78>
-
-### Data structure
-
-- <https://docs.mongodb.com/manual/core/wiredtiger/>
 
 ### Complexity
 
-- <https://stackoverflow.com/questions/29498722/mongodb-find-and-remove-algorithmic-complexity>
+Indexes use the [B-tree](https://en.wikipedia.org/wiki/B-tree) data structure which is a tree that can have more than 2 children, which allows to reduce the complexity to `O(log(n))`.
