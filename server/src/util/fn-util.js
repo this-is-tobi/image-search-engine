@@ -66,6 +66,7 @@ export const sortResult = (result) => {
       return {
         word: keyword.word,
         images: keyword.images.sort((a, b) => b.score - a.score),
+<<<<<<< HEAD
       }
     })
   } else {
@@ -111,14 +112,16 @@ export const KMPSearch = (word, text) => {
       m += n - T[n]
       if (n > 0) {
         n = T[n]
+=======
+>>>>>>> :fire: Remove unused/unnecessary code
       }
-    }
-  }
-  if (word.charAt(n) === '') {
-    return m
+    })
   } else {
-    return -1
+    return result.map(keyword => {
+      return {
+        word: keyword.word,
+        images: [keyword.images.sort((a, b) => b.score - a.score)[0]],
+      }
+    })
   }
 }
-// KMPSearch('ABCDABD', 'ABC ABCDAB ABCDACDABDE')
-// KMPSearch('ABCDABD', 'ABC ABCDAB ABCDABDABDE')
