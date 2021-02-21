@@ -66,54 +66,6 @@ export const sortResult = (result) => {
       return {
         word: keyword.word,
         images: keyword.images.sort((a, b) => b.score - a.score),
-<<<<<<< HEAD
-      }
-    })
-  } else {
-    return result.map(keyword => {
-      return {
-        word: keyword.word,
-        images: [keyword.images.sort((a, b) => b.score - a.score)[0]],
-      }
-    })
-  }
-}
-
-const KMPTable = (word) => {
-  const T = []
-  let i = 0
-  let j = -1
-  T[0] = j
-
-  while (word.charAt(i) !== '') {
-    if ((word.charAt(i) === word.charAt(j)) && j < ((i + (i % 2)) / 2)) {
-      T[i + 1] = j + 1
-      j++
-      i++
-    } else if (j > 0) {
-      j = T[j]
-    } else {
-      T[i + 1] = 0
-      i++
-      j = 0
-    }
-  }
-  return T
-}
-
-export const KMPSearch = (word, text) => {
-  let m = 0
-  let n = 0
-  const T = KMPTable(word)
-  while (text.charAt(m + n) !== '' && word.charAt(n) !== '') {
-    if (text.charAt(m + n) === word.charAt(n)) {
-      n++
-    } else {
-      m += n - T[n]
-      if (n > 0) {
-        n = T[n]
-=======
->>>>>>> :fire: Remove unused/unnecessary code
       }
     })
   } else {
