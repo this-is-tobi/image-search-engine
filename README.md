@@ -67,9 +67,20 @@ The client is running on `http://locahost:8080`.
 
 ### MongoDB indexes
 
+MongoDB use [WiredTiger](https://source.wiredtiger.com/) as storage engine.
+
+More on WiredTiger in MongoDB :
+
+- <https://docs.mongodb.com/manual/core/wiredtiger/>
+- <https://www.mongodb.com/presentations/a-technical-introduction-to-wiredtiger>
+
+More on WiredTiger performances :
+
+- <https://github.com/wiredtiger/wiredtiger/wiki/Btree-vs-LSM#take-aways>
+
 MongoDB implements [indexes](https://docs.mongodb.com/manual/indexes/) to limit the number of documents it must inspect on queries instead of scanning each document inside the collection.
 
-More on Mongo B-tree can be found here :
+More on Mongo B-tree :
 
 - <https://zhangliyong.github.io/posts/2014/02/19/mongodb-index-internals.html>
 
